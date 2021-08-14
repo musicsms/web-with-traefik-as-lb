@@ -1,0 +1,12 @@
+[http.middlewares.simpleAuth.basicAuth]
+  users = [
+    "admin:$apr1$G7tli5fU$uDFZSxJ66rPFiDGkBGoyn."
+  ]
+
+[http.routers.api]
+  rule = "Host(`lb.googoo.vn`)"
+  entrypoints = ["websecure"]
+  middlewares = ["simpleAuth"]
+  service = "api@internal"
+  [http.routers.api.tls]
+    certResolver = "lets-encrypt"
